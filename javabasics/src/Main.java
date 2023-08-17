@@ -1,18 +1,21 @@
+import animals.Animal;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
 
   // Az OOP 4 fő alapelve:
-  // - encapsulation, egységbe zárás
+  // ✅encapsulation, egységbe zárás
   // - inheritance, öröklődés
   // - polymorphism, több alakúság
   // - abstraction, absztrakció
 
   public static void main(String[] args) {
     Animal hedgehog = new Animal();
-    Animal dog = new Animal("Fürkész", 7, false);
+    Animal dog = new Animal("Fürkész", 7, 6);
     Animal cat = new Animal("Cirmi", 2);
+    dog.setAge(8);
 
 //    cat.feed();
 
@@ -22,7 +25,8 @@ public class Main {
     animals.add(cat);
 
     System.out.println(animals);
-    System.out.println(Animal.nextId());
+    hedgehog.feed(8);
+    System.out.println(animals);
   }
 
 }
