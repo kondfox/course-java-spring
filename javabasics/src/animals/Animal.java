@@ -5,26 +5,22 @@ public class Animal {
   static int idGenerator = 1;
   static int hungerLimit = 5;
 
-  private int id;
-  private String name;
+  protected int id;
   private int age;
   private int foodAmount;
 
   public Animal() {
-    this.name = "unknown";
     this.foodAmount = 0;
     this.id = idGenerator++;
   }
 
-  public Animal(String name, int age) {
-    this.name = name;
+  public Animal(int age) {
     this.age = age;
     this.foodAmount = 0;
     this.id = idGenerator++;
   }
 
-  public Animal(String name, int age, int foodAmount) {
-    this.name = name;
+  public Animal(int age, int foodAmount) {
     this.age = age;
     this.foodAmount = foodAmount;
     this.id = idGenerator++;
@@ -40,10 +36,6 @@ public class Animal {
 
   public int getId() {
     return this.id;
-  }
-
-  public String getName() {
-    return name;
   }
 
   public int getAge() {
@@ -64,7 +56,6 @@ public class Animal {
   public String toString() {
     return "animals.Animal{" +
             "id='" + id + '\'' +
-            ", name='" + name + '\'' +
             ", age=" + age +
             ", isHungry=" + isHungry() +
             '}';
