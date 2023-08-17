@@ -17,4 +17,10 @@ public class Dog extends Animal {
             ", name='" + name + '\'' +
             '}';
   }
+
+  @Override
+  public void speak() {
+    System.out.println("vau");
+  }
+
 }

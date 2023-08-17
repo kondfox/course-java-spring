@@ -1,6 +1,8 @@
 package animals;
 
-public class Animal {
+import others.Hungry;
+
+public abstract class Animal implements Hungry {
 
   static int idGenerator = 1;
   static int hungerLimit = 5;
@@ -30,10 +32,6 @@ public class Animal {
     return idGenerator;
   }
 
-  public void feed(int amount) {
-    this.foodAmount += amount;
-  }
-
   public int getId() {
     return this.id;
   }
@@ -48,8 +46,14 @@ public class Animal {
     }
   }
 
+  @Override
   public boolean isHungry() {
     return foodAmount < Animal.hungerLimit;
+  }
+
+  @Override
+  public void feed(int amount) {
+    this.foodAmount += amount;
   }
 
   @Override
@@ -60,5 +64,7 @@ public class Animal {
             ", isHungry=" + isHungry() +
             '}';
   }
+
+  public abstract void speak();
 
 }

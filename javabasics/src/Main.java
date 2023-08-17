@@ -2,6 +2,7 @@ import animals.Animal;
 import animals.Cat;
 import animals.Dog;
 import animals.Hedgehog;
+import others.Hungry;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ public class Main {
   // ✅polymorphism, több alakúság
   //    - compile time polymorphism
   //    - runtime polymorphism
-  // - abstraction, absztrakció
+  // ✅abstraction, absztrakció
 
   public static void main(String[] args) {
     Hedgehog hedgehog = new Hedgehog();
@@ -42,6 +43,10 @@ public class Main {
     objects.add(1);
     objects.add("asdas");
     objects.add(dog);
+
+    for (Animal animal : animals) {
+      animal.speak();
+    }
   }
 
 }
