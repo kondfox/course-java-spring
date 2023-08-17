@@ -13,4 +13,13 @@ public class Hedgehog extends Animal {
     // ...
   }
 
+  @Override
+  public String toString() {
+    return "Hedgehog{" +
+            "id=" + getId() +
+            ", age=" + getAge() +
+            ", quillAmount=" + quillAmount +
+            '}';
+  }
+
 }

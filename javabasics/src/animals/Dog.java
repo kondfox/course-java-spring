@@ -9,4 +9,12 @@ public class Dog extends Animal {
     this.name = name;
   }
 
+  @Override
+  public String toString() {
+    return "Dog{" +
+            "id=" + getId() +
+            ", age=" + getAge() +
+            ", name='" + name + '\'' +
+            '}';
+  }
 }
