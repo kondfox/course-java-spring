@@ -25,6 +25,19 @@ public class TodoServiceImpl implements TodoService {
   }
 
   @Override
+  public List<Todo> getTodos(Optional<Boolean> isDone, Optional<String> q) {
+    if (isDone.isEmpty() && q.isEmpty()) {
+      return getTodos();
+    } else if (isDone.isPresent() && q.isEmpty()) {
+      return todoRepository.findAllByIsDone(isDone.get());
+    } else if (q.isPresent() && isDone.isEmpty()) {
+      return todoRepository.findAllByTitleContainsIgnoreCase(q.get().toLowerCase());
+    } else {
+      return todoRepository.findAllByIsDoneAndTitleContainsIgnoreCase(isDone.get(), q.get());
+    }
+  }
+
+  @Override
   public Todo getById(Integer id) throws NoSuchTodoException {
     return todoRepository.findById(id).orElseThrow(NoSuchTodoException::new);
   }
