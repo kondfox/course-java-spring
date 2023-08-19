@@ -8,6 +8,8 @@ import com.todoapp.models.dto.UpdateTodo;
 import com.todoapp.services.TodoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,15 +43,20 @@ public class TodoController {
   }
 
   @PutMapping("/{id}")
-  public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UpdateTodo update) {
-    try {
-      Todo updatedTodo = todoService.update(id, update);
-      return ResponseEntity.status(HttpStatus.OK).body(updatedTodo);
-    } catch (NoSuchTodoException e) {
-      return ResponseEntity
-              .status(HttpStatus.NOT_FOUND)
-              .body(new ErrorMessage(e.getMessage()));
-    }
+  public ResponseEntity<Todo> update(@PathVariable Integer id, @RequestBody UpdateTodo update) {
+    Todo updatedTodo = todoService.update(id, update);
+    return ResponseEntity.status(HttpStatus.OK).body(updatedTodo);
+  }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<?> delete(@PathVariable Integer id) {
+    todoService.delete(id);
+    return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+  }
+
+  @ExceptionHandler(NoSuchTodoException.class)
+  public ResponseEntity<ErrorMessage> handleNoSuchTodoExceptions(NoSuchTodoException e) {
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(e.getMessage()));
   }
 
 }
