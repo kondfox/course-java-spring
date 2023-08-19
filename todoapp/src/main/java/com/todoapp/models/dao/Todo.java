@@ -6,9 +6,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "todos")
+@Getter
+@Setter
 public class Todo {
 
   @Id
@@ -24,30 +28,6 @@ public class Todo {
   public Todo(String title, boolean isDone) {
     this.title = title;
     this.isDone = isDone;
-  }
-
-  public Integer getId() {
-    return id;
-  }
-
-  public void setId(Integer id) {
-    this.id = id;
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public void setTitle(String title) {
-    this.title = title;
-  }
-
-  public boolean isDone() {
-    return isDone;
-  }
-
-  public void setDone(boolean done) {
-    isDone = done;
   }
 
 }
