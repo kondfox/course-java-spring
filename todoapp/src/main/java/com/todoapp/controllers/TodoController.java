@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,20 +45,23 @@ public class TodoController {
   }
 
   @PostMapping
-  public ResponseEntity<Todo> save(@RequestBody NewTodo newTodo) {
-    Todo savedTodo = todoService.save(newTodo);
+  public ResponseEntity<Todo> save(@RequestHeader Integer userId, @RequestBody NewTodo newTodo) {
+    Todo savedTodo = todoService.save(userId, newTodo);
     return ResponseEntity.status(HttpStatus.CREATED).body(savedTodo);
   }
 
-  @PutMapping("/{id}")
-  public ResponseEntity<Todo> update(@PathVariable Integer id, @RequestBody UpdateTodo update) {
-    Todo updatedTodo = todoService.update(id, update);
+  @PutMapping("/{todoId}")
+  public ResponseEntity<Todo> update(
+          @PathVariable Integer todoId,
+          @RequestHeader Integer userId,
+          @RequestBody UpdateTodo update) {
+    Todo updatedTodo = todoService.update(userId, todoId, update);
     return ResponseEntity.status(HttpStatus.OK).body(updatedTodo);
   }
 
-  @DeleteMapping("/{id}")
-  public ResponseEntity<?> delete(@PathVariable Integer id) {
-    todoService.delete(id);
+  @DeleteMapping("/{todoId}")
+  public ResponseEntity<?> delete(@PathVariable Integer todoId, @RequestHeader Integer userId) {
+    todoService.delete(userId, todoId);
     return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
   }
 
