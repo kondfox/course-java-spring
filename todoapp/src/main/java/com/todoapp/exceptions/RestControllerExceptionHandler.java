@@ -11,6 +11,7 @@ import java.util.NoSuchElementException;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @RestControllerAdvice
 public class RestControllerExceptionHandler {
@@ -18,6 +19,11 @@ public class RestControllerExceptionHandler {
   @ExceptionHandler(MissingRequestHeaderException.class)
   public ResponseEntity<ErrorMessage> handleBadRequestExceptions(MissingRequestHeaderException e) {
     return ResponseEntity.status(BAD_REQUEST).body(new ErrorMessage(e.getMessage()));
+  }
+
+  @ExceptionHandler(WrongUsernameOrPasswordException.class)
+  public ResponseEntity<ErrorMessage> handleUnauthorizedExceptions(WrongUsernameOrPasswordException e) {
+    return ResponseEntity.status(UNAUTHORIZED).body(new ErrorMessage(e.getMessage()));
   }
 
   @ExceptionHandler(ForbiddenActionException.class)
